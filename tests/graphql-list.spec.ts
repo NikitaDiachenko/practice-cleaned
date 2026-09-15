@@ -5,10 +5,11 @@ import {GetCountriesByContinent} from "../support/graphql-operations.js"
 test.describe("filtering by continent with included fields", () => {
 
     test('filtering by continent check', async ({request}) => {
-        const response = await graphQLRequest(request, GetCountriesByContinent, {continent: "EU"})
+        const response = await graphQLRequest(request, GetCountriesByContinent, {continent: "EU"}, "https://countries.trevorblades.com/")
 
-        expect(response.status()).toBe(200)
+        
         const result = await response.json()
+        expect(response.status()).toBe(200)
         
         expect(result.errors).toBeUndefined()
         expect(result.data.countries.length).toBeGreaterThan(0)
